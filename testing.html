@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Portal | Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e293b',
+                        accent: '#6366f1',
+                        dark: '#0f172a',
+                        light: '#f8fafc',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        .sidebar-link.active {
+            background-color: #dbeafe;
+            color: #3b82f6;
+            border-left: 4px solid #3b82f6;
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        .status-pending {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+        .status-inactive {
+            background-color: rgba(100, 116, 139, 0.1);
+            color: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex">
+    <!-- Sidebar -->
+    <div class="w-64 bg-white shadow-lg h-screen flex flex-col fixed">
+        <div class="p-6 border-b">
+            <div class="flex items-center space-x-3">
+                <div class="bg-primary w-10 h-10 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-building text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl text-secondary">Company Portal</h1>
+                    <p class="text-slate-500 text-xs">Manage your business</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="mb-6 px-4">
+                <h3 class="text-xs uppercase tracking-wider text-slate-500 font-medium mb-2 flex items-center">
+                    <i class="fas fa-user-cog mr-2"></i> Profile Management
+                </h3>
+                <div class="space-y-1">
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100 active">
+                        <i class="fas fa-building mr-3"></i> Company Profile
+                    </a>
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-plus-circle mr-3"></i> Create Profile
+                    </a>
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-cog mr-3"></i> Profile Settings
+                    </a>
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-lock mr-3"></i> Privacy Settings
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mb-6 px-4">
+                <h3 class="text-xs uppercase tracking-wider text-slate-500 font-medium mb-2 flex items-center">
+                    <i class="fas fa-user-circle mr-2"></i> Account
+                </h3>
+                <div class="space-y-1">
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-bell mr-3"></i> Notifications
+                    </a>
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-shield-alt mr-3"></i> Security
+                    </a>
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-credit-card mr-3"></i> Billing
+                    </a>
+                    <a href="#" class="sidebar-link block py-2.5 px-4 rounded-lg transition-all hover:bg-slate-100">
+                        <i class="fas fa-users mr-3"></i> Team Management
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4 border-t">
+            <button class="w-full py-3 px-4 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-all flex items-center justify-center">
+                <i class="fas fa-sign-in-alt mr-2"></i> Login
+            </button>
+            <button class="w-full mt-3 py-2.5 px-4 border border-primary text-primary rounded-lg font-medium hover:bg-blue-50 transition-all flex items-center justify-center">
+                <i class="fas fa-user-plus mr-2"></i> Register
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="flex-1 ml-64">
+        <!-- Topbar -->
+        <div class="bg-white shadow-sm h-16 flex items-center justify-between px-6 sticky top-0 z-10">
+            <div>
+                <h2 class="text-xl font-semibold text-secondary">Company Profile</h2>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fas fa-bell text-slate-500 text-xl cursor-pointer"></i>
+                        <span class="absolute -top-1 -right-1 bg-danger text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+                    </div>
+                    <div class="h-8 w-px bg-slate-200"></div>
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center text-white font-bold">JD</div>
+                        <div>
+                            <p class="font-medium text-sm">John Doe</p>
+                            <p class="text-slate-500 text-xs">Administrator</p>
+                        </div>
+                        <button class="text-slate-500 hover:text-slate-700">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content Area -->
+        <div class="p-6">
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                            <i class="fas fa-building text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-500 text-sm">Companies</p>
+                            <p class="text-2xl font-bold text-secondary">12</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-lg mr-4">
+                            <i class="fas fa-users text-success text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-500 text-sm">Team Members</p>
+                            <p class="text-2xl font-bold text-secondary">84</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-amber-100 rounded-lg mr-4">
+                            <i class="fas fa-tasks text-warning text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-500 text-sm">Active Projects</p>
+                            <p class="text-2xl font-bold text-secondary">18</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-cyan-100 rounded-lg mr-4">
+                            <i class="fas fa-chart-line text-info text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-500 text-sm">Growth Rate</p>
+                            <p class="text-2xl font-bold text-secondary">24.5%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Company Profile Card -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+                <div class="border-b border-slate-100 p-4 flex justify-between items-center">
+                    <h3 class="font-semibold text-lg text-secondary">Company Information</h3>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-600 transition-all">
+                        <i class="fas fa-edit mr-2"></i> Edit Profile
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <p class="text-slate-500 text-sm mb-1">Company Name</p>
+                            <p class="font-medium">Tech Innovations Inc.</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <p class="text-slate-500 text-sm mb-1">Industry</p>
+                            <p class="font-medium">Software Development</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <p class="text-slate-500 text-sm mb-1">Location</p>
+                            <p class="font-medium">San Francisco, CA</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <p class="text-slate-500 text-sm mb-1">Website</p>
+                            <p class="font-medium">www.techinnovations.com</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <p class="text-slate-500 text-sm mb-1">Established</p>
+                            <p class="font-medium">2015</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <p class="text-slate-500 text-sm mb-1">Employees</p>
+                            <p class="font-medium">150+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Members Table -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="border-b border-slate-100 p-4">
+                    <h3 class="font-semibold text-lg text-secondary">Team Members</h3>
+                </div>
+                <div class="p-4 overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="py-3 px-4 text-left text-slate-500 font-medium text-sm">Name</th>
+                                <th class="py-3 px-4 text-left text-slate-500 font-medium text-sm">Role</th>
+                                <th class="py-3 px-4 text-left text-slate-500 font-medium text-sm">Department</th>
+                                <th class="py-3 px-4 text-left text-slate-500 font-medium text-sm">Status</th>
+                                <th class="py-3 px-4 text-left text-slate-500 font-medium text-sm">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="bg-primary w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3">AJ</div>
+                                        Alex Johnson
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">CEO</td>
+                                <td class="py-3 px-4">Management</td>
+                                <td class="py-3 px-4">
+                                    <span class="status-badge status-active">Active</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <button class="text-primary hover:text-blue-700 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-slate-500 hover:text-slate-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="bg-success w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3">SW</div>
+                                        Sarah Williams
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">CTO</td>
+                                <td class="py-3 px-4">Technology</td>
+                                <td class="py-3 px-4">
+                                    <span class="status-badge status-active">Active</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <button class="text-primary hover:text-blue-700 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-slate-500 hover:text-slate-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="bg-warning w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3">MB</div>
+                                        Michael Brown
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">CFO</td>
+                                <td class="py-3 px-4">Finance</td>
+                                <td class="py-3 px-4">
+                                    <span class="status-badge status-pending">Pending</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <button class="text-primary hover:text-blue-700 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-slate-500 hover:text-slate-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="bg-danger w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3">ED</div>
+                                        Emily Davis
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">Lead Developer</td>
+                                <td class="py-3 px-4">Development</td>
+                                <td class="py-3 px-4">
+                                    <span class="status-badge status-active">Active</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <button class="text-primary hover:text-blue-700 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-slate-500 hover:text-slate-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="bg-info w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3">JW</div>
+                                        James Wilson
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">Marketing Director</td>
+                                <td class="py-3 px-4">Marketing</td>
+                                <td class="py-3 px-4">
+                                    <span class="status-badge status-inactive">Inactive</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <button class="text-primary hover:text-blue-700 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-slate-500 hover:text-slate-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden" id="loginModal">
+        <div class="bg-white rounded-xl w-full max-w-md animate-fadeIn">
+            <div class="p-6 border-b">
+                <h3 class="text-xl font-semibold text-secondary">Login to Portal</h3>
+                <p class="text-slate-500 text-sm mt-1">Enter your credentials to continue</p>
+            </div>
+            <div class="p-6">
+                <div class="mb-4">
+                    <label class="block text-slate-700 text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" class="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="your@email.com">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-slate-700 text-sm font-medium mb-2">Password</label>
+                    <input type="password" class="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your password">
+                </div>
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" class="w-4 h-4 text-primary rounded focus:ring-primary">
+                        <label for="remember" class="ml-2 text-slate-700 text-sm">Remember me</label>
+                    </div>
+                    <a href="#" class="text-primary text-sm hover:underline">Forgot password?</a>
+                </div>
+                <button class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-all">
+                    Login to Account
+                </button>
+                <div class="mt-4 text-center text-sm text-slate-600">
+                    Don't have an account? <a href="#" class="text-primary font-medium hover:underline">Register now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="fixed top-4 right-4 bg-success text-white py-3 px-6 rounded-lg shadow-lg flex items-center z-50 hidden" id="toast">
+        <i class="fas fa-check-circle mr-3"></i>
+        <span>Login successful!</span>
+    </div>
+    
+    <script>
+        // Toggle sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.sidebar-link').forEach(el => {
+                    el.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Show login modal
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.textContent.includes('Login')) {
+                btn.addEventListener('click', function() {
+                    document.getElementById('loginModal').classList.remove('hidden');
+                });
+            }
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if(e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+        
+        // Simulate login
+        document.querySelector('#loginModal button').addEventListener('click', function() {
+            document.getElementById('loginModal').classList.add('hidden');
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

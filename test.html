@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioLife | Explore the World of Biology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Color variables */
+        :root {
+            --primary: #2ecc71; /* Emerald Green */
+            --primary-dark: #27ae60;
+            --secondary: #3498db; /* Cool Blue */
+            --accent: #f8f9fa; /* Light Gray */
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background: #f5fdf9;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 1rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 4s infinite;
+        }
+
+        .logo-icon i {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .auth-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.5);
+        }
+
+        .auth-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--accent);
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            background: var(--secondary);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-dark);
+            max-width: 550px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 1rem 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 9px 25px rgba(39, 174, 96, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            padding: 1rem 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image-container {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .hero-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .decoration-item {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-item.cell {
+            width: 80px;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%232ecc71" stroke="%233498db" stroke-width="2"/><circle cx="35" cy="35" r="8" fill="%233498db"/><circle cx="65" cy="65" r="6" fill="%233498db"/><circle cx="65" cy="35" r="4" fill="%233498db"/></svg>');
+            background-size: contain;
+        }
+
+        .decoration-item.dna {
+            width: 120px;
+            height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q25,30 40,50 Q55,70 70,50 Q85,30 100,50" stroke="%233498db" stroke-width="3" fill="none"/><path d="M10,40 Q25,20 40,40 Q55,60 70,40 Q85,20 100,40" stroke="%232ecc71" stroke-width="3" fill="none"/><path d="M10,60 Q25,40 40,60 Q55,80 70,60 Q85,40 100,60" stroke="%232ecc71" stroke-width="3" fill="none"/></svg>');
+            background-size: contain;
+        }
+
+        /* Section styles */
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-dark);
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Articles section */
+        #articles {
+            background-color: var(--accent);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.1);
+        }
+
+        .article-content {
+            padding: 1.8rem;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* Species section */
+        #species {
+            background: linear-gradient(to bottom, var(--accent), #e8f7f1);
+        }
+
+        .species-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .species-card {
+            flex: 1 1 300px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .species-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .species-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .species-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .species-card:hover .species-image img {
+            transform: scale(1.1);
+        }
+
+        .species-type {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .species-content {
+            padding: 1.5rem;
+        }
+
+        .species-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .species-content .scientific-name {
+            font-style: italic;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .species-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        /* Gallery section */
+        #gallery {
+            background-color: var(--accent);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 280px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(46, 204, 113, 0.85);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Research section */
+        #research {
+            background: linear-gradient(to bottom, #e8f7f1, var(--accent));
+        }
+
+        .research-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .research-card {
+            flex: 1 1 350px;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .research-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .research-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .research-card p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .research-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .research-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(5px);
+        }
+
+        .research-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .research-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Contact section */
+        #contact {
+            background-color: var(--accent);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1 1 350px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+        }
+
+        .contact-form {
+            flex: 1 1 450px;
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            border: none;
+            padding: 1rem 2.5rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        /* Footer styles */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark), var(--text-dark));
+            color: var(--accent);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            left: 0;
+            bottom: 0;
+        }
+
+        .footer-column p {
+            margin-bottom: 1.5rem;
+            max-width: 350px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Authentication Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            animation: modalFade 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-toggle {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-radius: 50px;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        /* User dashboard */
+        .user-dashboard {
+            display: none;
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 300px;
+            z-index: 1500;
+            overflow: hidden;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            border: 3px solid white;
+        }
+
+        .user-body {
+            padding: 1.5rem;
+        }
+
+        .user-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-item .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-item .label {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .user-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .action-btn {
+            padding: 0.8rem;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .action-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .action-btn.secondary {
+            background: #f0f0f0;
+            color: var(--text-dark);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn.logout {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                max-width: 800px;
+            }
+            
+            .hero-text p {
+                margin: 0 auto 2.5rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-image-container {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 2rem 0;
+                gap: 1.5rem;
+            }
+            
+            nav.show {
+                display: flex;
+                animation: fadeIn 0.5s ease;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-image-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-image-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Animation keyframes */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(46, 204, 113, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="logo-text">BioLife</div>
+            </div>
+            
+            <nav id="navMenu">
+                <a href="#articles"><i class="fas fa-book"></i> Articles</a>
+                <a href="#species"><i class="fas fa-tree"></i> Species</a>
+                <a href="#gallery"><i class="fas fa-images"></i> Gallery</a>
+                <a href="#research"><i class="fas fa-microscope"></i> Research</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="auth-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="auth-btn secondary" id="signupBtn">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-decoration">
+            <div class="decoration-item cell" style="top: 10%; left: 5%;"></div>
+            <div class="decoration-item dna" style="top: 20%; right: 10%;"></div>
+            <div class="decoration-item cell" style="bottom: 15%; left: 15%;"></div>
+            <div class="decoration-item dna" style="bottom: 25%; right: 5%;"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Discover the <span>Wonders</span> of Life</h1>
+                <p>Explore the fascinating world of biology through our extensive collection of articles, species databases, and research materials. Join our community of nature enthusiasts and scientists today.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary"><i class="fas fa-book-open"></i> Explore Articles</button>
+                    <button class="btn-secondary"><i class="fas fa-user-graduate"></i> Join Community</button>
+                </div>
+            </div>
+              
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <img src="bio_1.jpg" alt="Biology Research">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Articles Section -->
+    <section id="articles">
+        <div class="section-header">
+            <h2>Latest Articles</h2>
+            <p>Discover the latest research and insights in the field of biology</p>
+        </div>
+        <div class="section-content">
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plant Biology">
+                    </div>
+                    <div class="article-content">
+                        <h3>The Secret Life of Plants</h3>
+                        <p>New research reveals how plants communicate and respond to their environment in ways we never imagined.</p>
+                        <div class="article-meta">
+                            <span><i class="fas fa-user"></i> Dr. Jane Smith</span>
+                            <span><i class="fas fa-calendar"></i> Oct 12, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1575503802870-45de6a6217c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Marine Biology">
+                    </div>
+                    <div class="article-content">
+                        <h3>Ocean Ecosystems in Peril</h3>
+                        <p>Exploring the effects of climate change on marine biodiversity and what we can do to protect our oceans.</p>
+                        <div class="article-meta">
+                            <span><i class="fas fa-user"></i> Prof. Michael Chen</span>
+                            <span><i class="fas fa-calendar"></i> Oct 5, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1585496269638-8a5fdb5b3c32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Genetics">
+                    </div>
+                    <div class="article-content">
+                        <h3>Advances in Genetic Engineering</h3>
+                        <p>How CRISPR technology is revolutionizing medicine and agriculture, and the ethical considerations involved.</p>
+                        <div class="article-meta">
+                            <span><i class="fas fa-user"></i> Dr. Sarah Johnson</span>
+                            <span><i class="fas fa-calendar"></i> Sep 28, 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Species Section -->
+    <section id="species">
+        <div class="section-header">
+            <h2>Featured Species</h2>
+            <p>Explore the incredible diversity of life on our planet</p>
+        </div>
+        <div class="section-content">
+            <div class="species-container">
+                <div class="species-card">
+                    <div class="species-image">
+                        <img src="https://images.unsplash.com/photo-1550853024-fae8cd4be47f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Amazon Parrot">
+                        <div class="species-type">Birds</div>
+                    </div>
+                    <div class="species-content">
+                        <h3>Blue-and-yellow Macaw</h3>
+                        <div class="scientific-name">Ara ararauna</div>
+                        <p>Native to South America, these colorful parrots are known for their intelligence and social behavior.</p>
+                        <div class="species-stats">
+                            <div class="stat">
+                                <div class="stat-value">30-35</div>
+                                <div class="stat-label">Years Lifespan</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">76-86 cm</div>
+                                <div class="stat-label">Length</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">900-1300 g</div>
+                                <div class="stat-label">Weight</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="species-card">
+                    <div class="species-image">
+                        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bengal Tiger">
+                        <div class="species-type">Mammals</div>
+                    </div>
+                    <div class="species-content">
+                        <h3>Bengal Tiger</h3>
+                        <div class="scientific-name">Panthera tigris tigris</div>
+                        <p>The majestic Bengal tiger is the most numerous tiger subspecies in Asia and India's national animal.</p>
+                        <div class="species-stats">
+                            <div class="stat">
+                                <div class="stat-value">8-10</div>
+                                <div class="stat-label">Years (Wild)</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">270-310 cm</div>
+                                <div class="stat-label">Length</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">180-260 kg</div>
+                                <div class="stat-label">Weight</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="species-card">
+                    <div class="species-image">
+                        <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Orchid">
+                        <div class="species-type">Plants</div>
+                    </div>
+                    <div class="species-content">
+                        <h3>Ghost Orchid</h3>
+                        <div class="scientific-name">Dendrophylax lindenii</div>
+                        <p>One of the rarest and most mysterious orchids, known for its ethereal white flowers and leafless appearance.</p>
+                        <div class="species-stats">
+                            <div class="stat">
+                                <div class="stat-value">15-25</div>
+                                <div class="stat-label">Years Lifespan</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">3-5 cm</div>
+                                <div class="stat-label">Flower Size</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">Rare</div>
+                                <div class="stat-label">Conservation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="section-header">
+            <h2>Nature Gallery</h2>
+            <p>Stunning visuals from the natural world</p>
+        </div>
+        <div class="section-content">
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rainforest">
+                    <div class="gallery-caption">Amazon Rainforest</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mountains">
+                    <div class="gallery-caption">Alpine Ecosystem</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coral Reef">
+                    <div class="gallery-caption">Coral Reef Biodiversity</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552727451-6f5671e14d83?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Desert">
+                    <div class="gallery-caption">Desert Adaptations</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558022103-603c34ab10ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Savanna">
+                    <div class="gallery-caption">African Savanna</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="bio_1.jpg" alt="Microscopic">
+                    <div class="gallery-caption">Microscopic World</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Research Section -->
+    <section id="research">
+        <div class="section-header">
+            <h2>Research Areas</h2>
+            <p>Cutting-edge research in biological sciences</p>
+        </div>
+        <div class="section-content">
+            <div class="research-container">
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3>Genomics</h3>
+                    <p>Our genomics research focuses on understanding the structure, function, and evolution of genomes across diverse species.</p>
+                    <a href="#" class="research-link">Explore Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Plant Biology</h3>
+                    <p>Investigating plant physiology, genetics, and ecology to address global challenges in food security and conservation.</p>
+                    <a href="#" class="research-link">Explore Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Neurobiology</h3>
+                    <p>Studying the nervous system at molecular, cellular, and systems levels to understand brain function and disorders.</p>
+                    <a href="#" class="research-link">Explore Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-virus"></i>
+                    </div>
+                    <h3>Microbiology</h3>
+                    <p>Exploring microbial diversity, pathogenesis, and applications in biotechnology and environmental science.</p>
+                    <a href="#" class="research-link">Explore Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Marine Biology</h3>
+                    <p>Researching marine ecosystems, species conservation, and the impacts of climate change on ocean biodiversity.</p>
+                    <a href="#" class="research-link">Explore Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>Conservation</h3>
+                    <p>Developing strategies to protect endangered species and preserve ecosystems for future generations.</p>
+                    <a href="#" class="research-link">Explore Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+            <p>Get in touch with our team of biologists and researchers</p>
+        </div>
+        <div class="section-content">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>Have questions about our research, publications, or educational programs? Reach out to our team.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Our Location</h4>
+                                <p>123 Biology Lane, Science Park, Research City 98765</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@biolife.org</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Subject of your message">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Your message here..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="logo-text">BioLife</div>
+                </div>
+                <p>Dedicated to exploring and understanding the incredible diversity of life on our planet through research, education, and conservation.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#articles"><i class="fas fa-chevron-right"></i> Articles</a></li>
+                    <li><a href="#species"><i class="fas fa-chevron-right"></i> Species Database</a></li>
+                    <li><a href="#research"><i class="fas fa-chevron-right"></i> Research Papers</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Educational Resources</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Research Areas</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Genomics</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Plant Biology</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Neurobiology</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Marine Biology</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Conservation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest research updates and news in biology.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email Address">
+                    </div>
+                    <button type="submit" class="submit-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 BioLife. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for nature enthusiasts</p>
+        </div>
+    </footer>
+    
+    <!-- Authentication Modals -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="close-modal" id="closeModal">&times;</div>
+            <div class="modal-header">
+                <h2>Welcome to BioLife</h2>
+                <p>Join our community of biology enthusiasts</p>
+            </div>
+            <div class="modal-body">
+                <div class="form-toggle">
+                    <div class="toggle-btn active" id="loginToggle">Login</div>
+                    <div class="toggle-btn" id="signupToggle">Sign Up</div>
+                </div>
+                
+                <form class="auth-form active" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Your password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Login <i class="fas fa-sign-in-alt"></i></button>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 1rem;">
+                        <a href="#" style="color: var(--secondary);">Forgot password?</a>
+                    </p>
+                </form>
+                
+                <form class="auth-form" id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" class="form-control" placeholder="Your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Create a password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupConfirm">Confirm Password</label>
+                        <input type="password" id="signupConfirm" class="form-control" placeholder="Confirm password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">I agree to the <a href="#" style="color: var(--secondary);">Terms of Service</a> and <a href="#" style="color: var(--secondary);">Privacy Policy</a></label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Create Account <i class="fas fa-user-plus"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Dashboard -->
+    <div class="user-dashboard" id="userDashboard">
+        <div class="user-header">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <h3 id="userName">John Doe</h3>
+            <p>Biology Enthusiast</p>
+        </div>
+        <div class="user-body">
+            <div class="user-stats">
+                <div class="stat-item">
+                    <div class="number">12</div>
+                    <div class="label">Articles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">24</div>
+                    <div class="label">Species</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">8</div>
+                    <div class="label">Projects</div>
+                </div>
+            </div>
+            
+            <div class="user-actions">
+                <div class="action-btn primary">
+                    <i class="fas fa-user-circle"></i> My Profile
+                </div>
+                <div class="action-btn secondary">
+                    <i class="fas fa-bookmark"></i> Saved Content
+                </div>
+                <div class="action-btn secondary">
+                    <i class="fas fa-cog"></i> Account Settings
+                </div>
+                <div class="action-btn logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Database simulation
+        const database = {
+            users: JSON.parse(localStorage.getItem('users')) || [],
+            currentUser: null,
+            
+            saveUsers() {
+                localStorage.setItem('users', JSON.stringify(this.users));
+            },
+            
+            registerUser(name, email, password) {
+                // Check if user already exists
+                if (this.users.some(user => user.email === email)) {
+                    return { success: false, message: "Email already registered" };
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: Date.now().toString(),
+                    name,
+                    email,
+                    password,
+                    createdAt: new Date().toISOString(),
+                    role: "member"
+                };
+                
+                this.users.push(newUser);
+                this.saveUsers();
+                return { success: true, user: newUser };
+            },
+            
+            loginUser(email, password) {
+                const user = this.users.find(user => 
+                    user.email === email && user.password === password
+                );
+                
+                if (user) {
+                    this.currentUser = user;
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    return { success: true, user };
+                } else {
+                    return { success: false, message: "Invalid credentials" };
+                }
+            },
+            
+            logoutUser() {
+                this.currentUser = null;
+                localStorage.removeItem('currentUser');
+            },
+            
+            loadCurrentUser() {
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                if (user) {
+                    this.currentUser = user;
+                }
+            }
+        };
+
+        // DOM Elements
+        const authModal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const closeModal = document.getElementById('closeModal');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const loginToggle = document.getElementById('loginToggle');
+        const signupToggle = document.getElementById('signupToggle');
+        const userDashboard = document.getElementById('userDashboard');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userName = document.getElementById('userName');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        // Initialize
+        database.loadCurrentUser();
+        updateAuthUI();
+
+        // Event Listeners
+        loginBtn.addEventListener('click', () => {
+            showModal('login');
+        });
+
+        signupBtn.addEventListener('click', () => {
+            showModal('signup');
+        });
+
+        closeModal.addEventListener('click', () => {
+            authModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.style.display = 'none';
+            }
+            
+            // Close user dashboard when clicking outside
+            if (!e.target.closest('#userDashboard') && 
+                !e.target.closest('#loginBtn') && 
+                !e.target.closest('#signupBtn') &&
+                userDashboard.style.display === 'block') {
+                userDashboard.style.display = 'none';
+            }
+        });
+
+        loginToggle.addEventListener('click', () => {
+            setActiveForm('login');
+        });
+
+        signupToggle.addEventListener('click', () => {
+            setActiveForm('signup');
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const result = database.loginUser(email, password);
+            if (result.success) {
+                updateAuthUI();
+                authModal.style.display = 'none';
+                showNotification('Login successful!', 'success');
+            } else {
+                showNotification(result.message, 'error');
+            }
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+            
+            if (password !== confirm) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            const result = database.registerUser(name, email, password);
+            if (result.success) {
+                database.loginUser(email, password);
+                updateAuthUI();
+                authModal.style.display = 'none';
+                showNotification('Account created successfully!', 'success');
+            } else {
+                showNotification(result.message, 'error');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            database.logoutUser();
+            updateAuthUI();
+            userDashboard.style.display = 'none';
+            showNotification('You have been logged out', 'info');
+        });
+
+        // Toggle user dashboard
+        document.querySelector('.auth-buttons').addEventListener('click', (e) => {
+            if (database.currentUser && 
+                (e.target === loginBtn || e.target === signupBtn || 
+                 e.target.closest('#loginBtn') || e.target.closest('#signupBtn'))) {
+                if (userDashboard.style.display === 'block') {
+                    userDashboard.style.display = 'none';
+                } else {
+                    userName.textContent = database.currentUser.name;
+                    userDashboard.style.display = 'block';
+                }
+                e.preventDefault();
+            }
+        });
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Helper functions
+        function showModal(formType) {
+            authModal.style.display = 'flex';
+            setActiveForm(formType);
+        }
+
+        function setActiveForm(formType) {
+            if (formType === 'login') {
+                loginToggle.classList.add('active');
+                signupToggle.classList.remove('active');
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+            } else {
+                signupToggle.classList.add('active');
+                loginToggle.classList.remove('active');
+                signupForm.classList.add('active');
+                loginForm.classList.remove('active');
+            }
+        }
+
+        function updateAuthUI() {
+            const authButtons = document.querySelector('.auth-buttons');
+            if (database.currentUser) {
+                authButtons.innerHTML = `
+                    <button class="auth-btn" id="userBtn">
+                        <i class="fas fa-user"></i> ${database.currentUser.name}
+                    </button>
+                `;
+            } else {
+                authButtons.innerHTML = `
+                    <button class="auth-btn" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="auth-btn secondary" id="signupBtn">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                `;
+                // Reattach event listeners to new buttons
+                document.getElementById('loginBtn').addEventListener('click', () => showModal('login'));
+                document.getElementById('signupBtn').addEventListener('click', () => showModal('signup'));
+            }
+        }
+
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 
+                                   type === 'error' ? 'fa-exclamation-circle' : 
+                                   'fa-info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // CSS for notifications
+        const notificationStyle = document.createElement('style');
+        notificationStyle.textContent = `
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 3000;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+            }
+            
+            .notification.success {
+                background: var(--success);
+            }
+            
+            .notification.error {
+                background: var(--danger);
+            }
+            
+            .notification.info {
+                background: var(--secondary);
+            }
+            
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .notification i {
+                font-size: 1.2rem;
+            }
+        `;
+        document.head.appendChild(notificationStyle);
+
+        // Hero animations
+        const heroElements = document.querySelectorAll('.hero-text h1, .hero-text p, .hero-buttons');
+        heroElements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.animation = `fadeIn 0.8s ease forwards ${index * 0.3}s`;
+        });
+        
+        // Decoration animations
+        const decorationItems = document.querySelectorAll('.decoration-item');
+        decorationItems.forEach((item, index) => {
+            const delay = Math.random() * 2;
+            item.style.animationDelay = `${delay}s`;
+        });
+        
+        // Section animations on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `fadeIn 0.8s ease forwards`;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all section cards and headers
+        document.querySelectorAll('.article-card, .species-card, .research-card, .gallery-item, .section-header').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
